@@ -1,4 +1,5 @@
 import React, { useEffect, useState } from "react";
+import { Link } from "react-router-dom";
 
 const ServiceBanner = () => {
   const [services, setServices] = useState([]);
@@ -22,9 +23,18 @@ const ServiceBanner = () => {
         {services.map((service) => (
           <div key={service._id}>
             <div className="card card-compact bg-base-100 w-96 shadow-xl">
-              <figure>
+              <figure
+                style={{
+                  background:
+                    "linear-gradient(to top, var(--bg-theme-color1), transparent)",
+                }}
+              >
                 <img
-                  src="https://img.daisyui.com/images/stock/photo-1606107557195-0e29a4b5b4aa.jpg"
+                  style={{
+                    height: "300px",
+                  }}
+                  className="w-full bg-gradient-to-r from-blue-500 to-transparent"
+                  src={service.img}
                   alt="Shoes"
                 />
               </figure>
@@ -37,7 +47,7 @@ const ServiceBanner = () => {
                       backgroundImage:
                         "linear-gradient(90deg, #11998e 0%, #38ef7d 100%)",
                     }}
-                    className="btn text-white hover:bg-gradient-to-r from-green-100 to-blue-500 "
+                    className="btn text-white  "
                   >
                     Details
                   </button>
@@ -46,6 +56,14 @@ const ServiceBanner = () => {
             </div>
           </div>
         ))}
+      </div>
+
+      <div className="flex justify-center p-10">
+        <Link to="/services">
+          <button className="btn  bg-gradient-to-r from-indigo-600 to-blue-500  text-white">
+            View All Details
+          </button>
+        </Link>
       </div>
     </div>
   );
