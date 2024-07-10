@@ -1,7 +1,7 @@
 import React from "react";
 
-const MyReviewCard = ({ r }) => {
-  const { serviceName, email, reviewer, review, time } = r;
+const MyReviewCard = ({ r, handleDeleteReview, handleReviewUpdate }) => {
+  const { _id, serviceName, email, reviewer, review, time } = r;
 
   return (
     <div>
@@ -19,6 +19,7 @@ const MyReviewCard = ({ r }) => {
           </div>
           <div className=" flex justify-between">
             <button
+              onClick={() => handleReviewUpdate(_id)}
               style={{
                 backgroundImage:
                   "linear-gradient(90deg, #808080 0%, #3fada8 100%)",
@@ -28,6 +29,7 @@ const MyReviewCard = ({ r }) => {
               UPDATE
             </button>
             <button
+              onClick={() => handleDeleteReview(_id)}
               style={{
                 backgroundImage:
                   "linear-gradient(90deg, #cb356b 0%, #bd3f32 100%)",
