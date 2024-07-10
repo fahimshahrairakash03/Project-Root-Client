@@ -1,11 +1,16 @@
 import React, { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../context/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
 import { GoogleAuthProvider } from "firebase/auth";
+import toast from "react-hot-toast";
 
 const Login = () => {
   const { signIn, googleSignIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+
+  const from = location.state?.from?.pathname || "/";
 
   const handleGoogleSignIn = () => {
     const provider = new GoogleAuthProvider();
@@ -13,6 +18,8 @@ const Login = () => {
       .then((res) => {
         const user = res.user;
         console.log(user);
+        toast.success("Login Successful");
+        navigate(from, { replace: true });
       })
       .then((error) => console.log(error));
   };
@@ -27,6 +34,8 @@ const Login = () => {
       .then((res) => {
         const user = res.user;
         console.log(user);
+        toast.success("Login Successful");
+        navigate(from, { replace: true });
       })
       .then((error) => console.log(error));
   };

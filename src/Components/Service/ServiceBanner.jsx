@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import { Link } from "react-router-dom";
+import ServiceCard from "./ServiceCard";
 
 const ServiceBanner = () => {
   const [services, setServices] = useState([]);
@@ -21,40 +22,7 @@ const ServiceBanner = () => {
       </h2>
       <div className="grid gap-5 lg:grid-cols-3 md:grid-cols-2 sm:grid-cols-1">
         {services.map((service) => (
-          <div key={service._id}>
-            <div className="card card-compact bg-base-100 w-96 shadow-xl">
-              <figure
-                style={{
-                  background:
-                    "linear-gradient(to top, var(--bg-theme-color1), transparent)",
-                }}
-              >
-                <img
-                  style={{
-                    height: "300px",
-                  }}
-                  className="w-full bg-gradient-to-r from-blue-500 to-transparent"
-                  src={service.img}
-                  alt="Shoes"
-                />
-              </figure>
-              <div className="card-body">
-                <h2 className="card-title">{service.title}</h2>
-                <p>{service.description.slice(0, 50)}. . .</p>
-                <div className="card-actions justify-end">
-                  <button
-                    style={{
-                      backgroundImage:
-                        "linear-gradient(90deg, #11998e 0%, #38ef7d 100%)",
-                    }}
-                    className="btn text-white  "
-                  >
-                    Details
-                  </button>
-                </div>
-              </div>
-            </div>
-          </div>
+          <ServiceCard key={service._id} service={service}></ServiceCard>
         ))}
       </div>
 

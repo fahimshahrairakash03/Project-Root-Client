@@ -24,14 +24,22 @@ const Navbar = () => {
         </Link>
       </li>
       <li>
-        <Link className="font-medium text-gray-500" to="/addService">
-          ADD SERVICE
+        <Link className="font-medium text-gray-500" to="/myreviews">
+          MY REVIEWS
         </Link>
       </li>
+
       {user ? (
         <>
           <li>
-            <Link className="font-medium text-gray-500">{user?.email}</Link>
+            <Link className="font-medium text-gray-500" to="/addService">
+              ADD SERVICE
+            </Link>
+          </li>
+          <li>
+            <Link className="font-medium text-gray-500">
+              {user?.email.slice(0, 3) + "..@"}
+            </Link>
           </li>
           <button
             onClick={handleSignOut}

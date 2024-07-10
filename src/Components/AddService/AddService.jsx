@@ -39,7 +39,7 @@ const AddService = () => {
   };
 
   return (
-    <div className="p-5">
+    <div className="p-5 bg-base-200">
       <h1 className="text-center text-4xl text-black font-bold">ADD SERVICE</h1>
 
       <div className="mt-8 flex justify-center items-center">
@@ -73,7 +73,7 @@ const AddService = () => {
             <input
               type="text"
               name="price"
-              placeholder="Service Name"
+              placeholder="Service Price"
               className="input input-bordered w-full max-w-xs"
             />
           </label>
