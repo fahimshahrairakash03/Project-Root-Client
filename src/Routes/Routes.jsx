@@ -8,6 +8,7 @@ import AddService from "../Components/AddService/AddService";
 import ServiceDetails from "../Components/Service/ServiceDetails";
 import MyReviews from "../Components/Review/MyReviews";
 import PrivateRoute from "./PrivateRoute";
+import UpdateReview from "../Components/Review/UpdateReview";
 
 export const routes = createBrowserRouter([
   {
@@ -21,7 +22,7 @@ export const routes = createBrowserRouter([
       {
         path: "/services",
         element: <Services></Services>,
-        loader: () => fetch("http://localhost:3000/services"),
+        loader: () => fetch("https://project-root-server.vercel.app/services"),
       },
       {
         path: "/service/:id",
@@ -40,6 +41,12 @@ export const routes = createBrowserRouter([
             <MyReviews></MyReviews>
           </PrivateRoute>
         ),
+      },
+      {
+        path: "/update/:id",
+        element: <UpdateReview></UpdateReview>,
+        loader: ({ params }) =>
+          fetch(`http://localhost:3000/reviews/${params.id}`),
       },
       {
         path: "/login",

@@ -1,4 +1,5 @@
 import React from "react";
+import { Link } from "react-router-dom";
 
 const MyReviewCard = ({ r, handleDeleteReview, handleReviewUpdate }) => {
   const { _id, serviceName, email, reviewer, review, time } = r;
@@ -18,16 +19,17 @@ const MyReviewCard = ({ r, handleDeleteReview, handleReviewUpdate }) => {
             <p className="text-gray-500 text-sm">{time}</p>
           </div>
           <div className=" flex justify-between">
-            <button
-              onClick={() => handleReviewUpdate(_id)}
-              style={{
-                backgroundImage:
-                  "linear-gradient(90deg, #808080 0%, #3fada8 100%)",
-              }}
-              className="btn btn-sm text-white"
-            >
-              UPDATE
-            </button>
+            <Link to={`/update/${_id}`}>
+              <button
+                style={{
+                  backgroundImage:
+                    "linear-gradient(90deg, #808080 0%, #3fada8 100%)",
+                }}
+                className="btn btn-sm text-white"
+              >
+                UPDATE
+              </button>
+            </Link>
             <button
               onClick={() => handleDeleteReview(_id)}
               style={{

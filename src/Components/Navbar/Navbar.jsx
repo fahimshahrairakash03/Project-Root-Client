@@ -1,9 +1,18 @@
-import React, { useContext } from "react";
+import React, { useContext, useState } from "react";
 import { Link } from "react-router-dom";
 import { AuthContext } from "../../context/AuthProvider";
 
 const Navbar = () => {
   const { user, logOut } = useContext(AuthContext);
+  const [color, setColor] = useState(false);
+  const changeColor = () => {
+    if (window.scrollY > +90) {
+      setColor(true);
+    } else {
+      setColor(false);
+    }
+  };
+  window.addEventListener("scroll", changeColor);
 
   const handleSignOut = () => {
     logOut()
@@ -14,17 +23,32 @@ const Navbar = () => {
   const menuItem = (
     <>
       <li>
-        <Link className="font-medium text-gray-500" to="/">
+        <Link
+          className={
+            color ? "font-medium text-white" : "font-medium text-gray-500"
+          }
+          to="/"
+        >
           HOME
         </Link>
       </li>
       <li>
-        <Link className="font-medium text-gray-500" to="/services">
+        <Link
+          className={
+            color ? "font-medium text-white" : "font-medium text-gray-500"
+          }
+          to="/services"
+        >
           SERVICES
         </Link>
       </li>
       <li>
-        <Link className="font-medium text-gray-500" to="/myreviews">
+        <Link
+          className={
+            color ? "font-medium text-white" : "font-medium text-gray-500"
+          }
+          to="/myreviews"
+        >
           MY REVIEWS
         </Link>
       </li>
@@ -32,12 +56,21 @@ const Navbar = () => {
       {user ? (
         <>
           <li>
-            <Link className="font-medium text-gray-500" to="/addService">
+            <Link
+              className={
+                color ? "font-medium text-white" : "font-medium text-gray-500"
+              }
+              to="/addService"
+            >
               ADD SERVICE
             </Link>
           </li>
           <li>
-            <Link className="font-medium text-gray-500">
+            <Link
+              className={
+                color ? "font-medium text-white" : "font-medium text-gray-500"
+              }
+            >
               {user?.email.slice(0, 3) + "..@"}
             </Link>
           </li>
@@ -55,12 +88,22 @@ const Navbar = () => {
       ) : (
         <>
           <li>
-            <Link className="font-medium text-gray-500" to="/login">
+            <Link
+              className={
+                color ? "font-medium text-white" : "font-medium text-gray-500"
+              }
+              to="/login"
+            >
               LOGIN
             </Link>
           </li>
           <li>
-            <Link className="font-medium text-gray-500" to="/signup">
+            <Link
+              className={
+                color ? "font-medium text-white" : "font-medium text-gray-500"
+              }
+              to="/signup"
+            >
               REGISTER
             </Link>
           </li>
@@ -70,7 +113,11 @@ const Navbar = () => {
   );
   return (
     <div>
-      <div className="navbar bg-base-100">
+      <div
+        className={
+          color ? "navbar fixed z-10 bg-black" : "navbar fixed z-10 bg-base-100"
+        }
+      >
         <div className="navbar-start">
           <div className="dropdown">
             <div tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
@@ -101,7 +148,15 @@ const Navbar = () => {
             src="https://project-roots-1f819.web.app/static/media/logo.3780d97d85dd3b9362f6.jpg"
             alt=""
           />
-          <a className="btn btn-ghost text-xl">ROOTS</a>
+          <a
+            className={
+              color
+                ? "btn btn-ghost text-white text-xl"
+                : "btn btn-ghost text-xl"
+            }
+          >
+            ROOTS
+          </a>
         </div>
         <div className="navbar-end hidden lg:flex ">
           <ul className="menu menu-horizontal px-1">{menuItem}</ul>

@@ -1,10 +1,28 @@
 import React, { useContext } from "react";
 import { FcGoogle } from "react-icons/fc";
 import { AuthContext } from "../../context/AuthProvider";
-import { Link } from "react-router-dom";
+import { Link, useLocation, useNavigate } from "react-router-dom";
+import { GoogleAuthProvider } from "firebase/auth";
+import toast from "react-hot-toast";
 
 const SignUp = () => {
   const { createUser, googleSignIn } = useContext(AuthContext);
+  const navigate = useNavigate();
+  const location = useLocation();
+  const from = location.state?.from?.pathname || "/";
+
+  const handleGoogleSingIn = () => {
+    const provider = new GoogleAuthProvider();
+    googleSignIn(provider)
+      .then((res) => {
+        const user = res.user;
+        console.log(user);
+        toast.success("Login Successful");
+        navigate(from, { replace: true });
+      })
+      .then((error) => console.log(error));
+  };
+
   const handleSignUp = (e) => {
     e.preventDefault();
     const form = e.target;
@@ -67,10 +85,13 @@ const SignUp = () => {
                 >
                   REGISTER
                 </button>
-                <button className="mt-4 btn btn-outline">
+                <button
+                  onClick={handleGoogleSingIn}
+                  className="mt-4 btn btn-outline"
+                >
                   {" "}
                   <FcGoogle />
-                  REGISTER WITH GOOGLE
+                  LOGIN WITH GOOGLE
                 </button>
               </div>
             </form>
